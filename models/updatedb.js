@@ -1,6 +1,5 @@
 //connect mongodb
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://qxc:112211@ds041583.mongolab.com:41583/qxcdb');
+var mongoose = require('./mongoose.js');
 var db = mongoose.connection;
 //db on error
 db.on('error', function (error) {
