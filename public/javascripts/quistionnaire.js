@@ -35,7 +35,7 @@ function getTextInfo() {
     var temptext1 = "";//选项名称
     var temptext2 = "";//选项内容
     var textinfo = $("[type='text']:visible");//找到可见的文本框，存在不可见的
-    console.log(textinfo);
+    //console.log(textinfo);//测试
     if (textinfo.length > 0) {
         for (var a = 0; a < textinfo.length; a++) {
             temptext1 = textinfo.eq(a).parent().prev().text();
