@@ -31,24 +31,28 @@ var btnstyle = function () {
 //生成输入的文字信息对应的json文件
 function getTextInfo() {
     //文字信息生成
-    var info = {};
+    var info = [];
     var temptext1 = "";//选项名称
     var temptext2 = "";//选项内容
     var textinfo = $("[type='text']:visible");//找到可见的文本框，存在不可见的
-    //console.log(textinfo);//测试
+    var tempjson={};
     if (textinfo.length > 0) {
         for (var a = 0; a < textinfo.length; a++) {
+            tempjson={};
             temptext1 = textinfo.eq(a).parent().prev().text();
             temptext2 = textinfo.eq(a).val();
-            info[temptext1] = temptext2;
+            tempjson["type"]=temptext1;
+            tempjson["text"] = temptext2;
+            info.push(tempjson);
         }
     }
+    //console.log(info);
     return info;
 };
 //生成按钮信息对应的json文件
 function getBtnInfo() {
     //按钮信息生成
-    var info = {};
+    var info = [];
     var temptext1 = "";//所属类别
     var temptext2 = "";//选项所选
     var btninfo = $(":checked");
@@ -61,17 +65,19 @@ function getBtnInfo() {
             tempjson = {};
             tempjson['category'] = temptext1;
             tempjson['btn'] = temptext2;
-            info[a.toString()] = tempjson;
+            info.push(tempjson);
         }
     }
+    //console.log(info);
     return info;
 };
 //生成POST需要的所有被勾选的id
 function genSubmitdata() {
     //所有信息的容器
     var infonode = {};
-    infonode["textinfo"] = getTextInfo();
-    infonode["btninfo"] = getBtnInfo();
+    infonode["textInfo"] = getTextInfo();
+    infonode["btnInfo"] = getBtnInfo();
+    console.log(JSON.stringify(infonode));
     return JSON.stringify(infonode);
 };
 

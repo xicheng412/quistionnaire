@@ -1,37 +1,33 @@
 //connect mongodb
 var mongoose = require('./mongoose.js');
 var db = mongoose.connection;
+
 //db on error
 db.on('error', function (error) {
+    console.log("create data error");
     console.log(error);
 });
 
 //set schma and model
 var Schema = require('mongoose').Schema;
 
-var btnSchema = new Schema({
-    btnId: String,
-    btnText: String,
-    description: String,
-    price: Number
-});
 var btnPicked = new Schema({
-    btnBlockTitle: String,
-    btnBlockDescription: String,
-    btnsType: String,
-    btnsName: String,
-    btns: [btnSchema]
+    category: String,
+    btn: String
 });
 var textInfo = new Schema({
     type: String,
     text: String
 });
 
-//two types of infomation
-var customer = new Schema({
+//two types of infomations
+var quistions = new Schema({
     textInfo: [textInfo],
-    orderRecord: [btnPicked]
+    btnInfo: [btnPicked]
 });
 var model = db.model('Orders', quistions);
 
+db.saveData = function (data) {
+    new model(data).save();
+};
 module.exports = db;
