@@ -27,7 +27,7 @@ var quistions = new Schema({
 });
 var model = db.model('Orders', quistions);
 
-db.saveData = function (data) {
-    new model(data).save();
+db.saveData = function (data, func) {
+    new model(data).save(func);
 };
 module.exports = db;
